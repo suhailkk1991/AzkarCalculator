@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/lay_QathmName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtQathmNameHeader"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dip"
+                    android:layout_weight="1"
+                    android:text="Zikr Name:" />
+
+                <TextView
+                    android:id="@+id/txtQathmNameVal"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dip"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="Nazr1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lay_Qathm_surath_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay_QathmName"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtQathm_surath_nameHeader"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dip"
+                    android:layout_weight="1"
+                    android:text="Surath nme:" />
+
+                <EditText
+                    android:id="@+id/edtQathm_surath_nameVal"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dip"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="Fathiha" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layQathmAyathNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay_Qathm_surath_name"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/txtQathmAyathNoHeader"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dip"
+                    android:layout_weight="1"
+                    android:text="Ayath No" />
+
+                <EditText
+                    android:id="@+id/edtQathmAyathNoVal"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dip"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:inputType="number"
+                    android:text="0" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

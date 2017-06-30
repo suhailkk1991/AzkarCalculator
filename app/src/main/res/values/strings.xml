@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AzkarCalculator</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_quote_arabic">يَـٰٓأَيُّہَا ٱلَّذِينَ ءَامَنُواْ ٱذۡكُرُواْ ٱللَّهَ ذِكۡرً۬ا كَثِيرً۬ا</string>
+    <string name="app_name_arabic"> أذكار   </string>
+    <string name="zikr_saved_suucess_message">Zikr saved successfully</string>
+    <string name="swalath_saved_suucess_message">Swalath saved successfully</string>
+    <string name="data_updated_succesfully">Data updated successfully</string>
+    <string name="no_data_available">No data available</string>
+    <string name="title_qathm">Qathm</string>
+    <string name="title_swalath">Swalath</string>
+    <string name="title_zikr">Zikr</string>
+    <string name="title_Hadhadh">Hadhadhs</string>
+</resources>

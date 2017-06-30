@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "816644367735",
+    "firebase_url": "https://pushnotificationdemo-1cd2e.firebaseio.com",
+    "project_id": "pushnotificationdemo-1cd2e",
+    "storage_bucket": "pushnotificationdemo-1cd2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816644367735:android:7704717e88f4efa6",
+        "android_client_info": {
+          "package_name": "syntaxsolutions.com.pushnotificationdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816644367735-i3qbmh3indc1cvc07vtfvhggdo7c9str.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVkeHZQrR1ExLkoIMDRX2WIWuZgrc8bC8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816644367735:android:a9e863a906a75610",
+        "android_client_info": {
+          "package_name": "com.syntaxsolutions.azkarcalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816644367735-i3qbmh3indc1cvc07vtfvhggdo7c9str.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVkeHZQrR1ExLkoIMDRX2WIWuZgrc8bC8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
