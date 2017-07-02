@@ -25,4 +25,5 @@ public class InformationDetailsDto {
     public void setData(String data) {
         this.data = data;
     }
+    
 }
