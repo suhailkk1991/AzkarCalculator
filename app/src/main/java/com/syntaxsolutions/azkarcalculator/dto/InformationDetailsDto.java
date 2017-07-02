@@ -20,6 +20,7 @@ public class InformationDetailsDto {
 
     public String getData() {
         return data;
+        
     }
 
     public void setData(String data) {
