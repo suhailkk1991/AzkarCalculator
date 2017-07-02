@@ -6,8 +6,9 @@ package com.syntaxsolutions.azkarcalculator.dto;
 
 public class InformationDetailsDto {
     private int feedId;
-    
+
     private String data;
+    //suhail
 
     public int getFeedId() {
         return feedId;
