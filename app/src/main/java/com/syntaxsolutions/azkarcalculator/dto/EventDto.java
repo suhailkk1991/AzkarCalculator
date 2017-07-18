@@ -8,7 +8,7 @@ public class EventDto {
     private String fromScreen;
     private long currentCount;
     private String name;
-    int a=0;
+
 
     public String getName() {
         return name;
