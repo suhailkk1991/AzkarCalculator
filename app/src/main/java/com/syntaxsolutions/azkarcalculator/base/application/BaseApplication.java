@@ -19,6 +19,7 @@ import com.syntaxsolutions.azkarcalculator.constants.Constants;
 public class BaseApplication extends Application {
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
+    static Context context;
 
     @Override
     public void onCreate() {
@@ -26,6 +27,7 @@ public class BaseApplication extends Application {
         FlowManager.init(this);
         Stetho.initializeWithDefaults(this);
         Fresco.initialize(this);
+        context = this;
 
 
     }
@@ -45,8 +47,8 @@ public class BaseApplication extends Application {
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
         MultiDex.install(this);
     }
 
@@ -66,5 +68,8 @@ public class BaseApplication extends Application {
         return storageReference;
     }
 
+    public static Context getApplicationBase() {
+        return context;
+    }
 
 }

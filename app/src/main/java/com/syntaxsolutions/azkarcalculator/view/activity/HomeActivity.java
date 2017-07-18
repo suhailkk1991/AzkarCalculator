@@ -2,7 +2,8 @@ package com.syntaxsolutions.azkarcalculator.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,30 +17,28 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.syntaxsolutions.azkarcalculator.R;
 import com.syntaxsolutions.azkarcalculator.base.application.BaseActivity;
+import com.syntaxsolutions.azkarcalculator.base.application.BaseApplication;
 import com.syntaxsolutions.azkarcalculator.dto.InformationFeed;
+import com.syntaxsolutions.azkarcalculator.util.NetworkStateReciver;
+import com.syntaxsolutions.azkarcalculator.util.NetworkUtil;
 import com.syntaxsolutions.azkarcalculator.view.adapter.HomeNewsFeedAdapter;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by lenovo on 26-12-2016.
@@ -53,6 +52,8 @@ public class HomeActivity extends BaseActivity {
     RecyclerView recyclerView;
     HomeNewsFeedAdapter lstNewsFeedAdapter;
     ProgressDialog progressDialog;
+    NetworkStateReciver networkStateReciver;
+    int count = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,36 +90,45 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void getTheDataFromFireBase() {
-        progressDialog = new ProgressDialog(HomeActivity.this);
-        progressDialog.setMessage("Loading data...");
-        progressDialog.show();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("InformationFeedHeader");
+        if (NetworkUtil.isConnected()) {
+            if (count == 0) {
+                count++;
+                registerNetworkReciver();
+            }
+            progressDialog = new ProgressDialog(HomeActivity.this);
+            progressDialog.setMessage("Loading data...");
+            progressDialog.show();
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("InformationFeedHeader");
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                InformationFeed feed = new InformationFeed();
-                lstFeeds = new ArrayList<InformationFeed>();
-                if (snapshot != null && snapshot.getValue() != null) {
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    InformationFeed feed = new InformationFeed();
+                    lstFeeds = new ArrayList<InformationFeed>();
+                    if (snapshot != null && snapshot.getValue() != null) {
 
-                    for (DataSnapshot postSnapshot1 : snapshot.getChildren()) {
+                        for (DataSnapshot postSnapshot1 : snapshot.getChildren()) {
 
-                        for (DataSnapshot postSnapshot2 : postSnapshot1.getChildren()) {
-                            InformationFeed messageMap = postSnapshot2.getValue(InformationFeed.class);
-                            lstFeeds.add(messageMap);
+                            for (DataSnapshot postSnapshot2 : postSnapshot1.getChildren()) {
+                                InformationFeed messageMap = postSnapshot2.getValue(InformationFeed.class);
+                                lstFeeds.add(messageMap);
+                            }
+
                         }
-
+                        progressDialog.dismiss();
+                        unRegisterNetworkReciver();
+                        setAdapter();
                     }
-                    progressDialog.dismiss();
-                    setAdapter();
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError firebaseError) {
+                @Override
+                public void onCancelled(DatabaseError firebaseError) {
 
-            }
-        });
+                }
+            });
+        } else {
+            Toast.makeText(getApplicationContext(), "You are offline", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void setAdapter() {
@@ -159,4 +169,36 @@ public class HomeActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    public synchronized void registerNetworkReciver() {
+        networkStateReciver = new NetworkStateReciver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkStateReciver, intentFilter);
+
+    }
+
+    public synchronized void unRegisterNetworkReciver() {
+        if (count > 0) {
+            unregisterReceiver(networkStateReciver);
+            count--;
+        }
+    }
+
+    public void dismissProgressBar() {
+        if (progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unRegisterNetworkReciver();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unRegisterNetworkReciver();
+    }
 }
